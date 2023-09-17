@@ -16,8 +16,12 @@ struct AddTransactionView: View{
             TextField("Cost", text: $viewModel.costStr)
                 .keyboardType(.numberPad)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-            TextField("Type", text: $viewModel.type)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+            Picker("Type", selection: $viewModel.type) {
+                ForEach(viewModel.presetTypes, id: \.self) { type in
+                    Text(type)
+                }
+            }
+            .pickerStyle(MenuPickerStyle())
             Button(action: {
                 viewModel.addTransaction()
             }) {
