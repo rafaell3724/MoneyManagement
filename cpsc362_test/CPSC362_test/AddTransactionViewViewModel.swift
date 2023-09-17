@@ -14,6 +14,8 @@ class AddTransactionViewViewModel: ObservableObject{
     @Published var cost:Float=0
     @Published var type:String=""
     
+    let presetTypes = ["Choose Type","Groceries", "Food", "Entertainment", "Shopping", "Transportation", "Investment", "Savings"]
+    
     init(){}
     
     func log(){
@@ -27,21 +29,25 @@ class AddTransactionViewViewModel: ObservableObject{
     }
     
     func addTransaction(){
-        log()
-        if let uid=Auth.auth().currentUser?.uid {
-            print("uid: \(uid)")
-            let db=Firestore.firestore()
-            let colRef=db.collection("transactions")
-            let data=[
-                "item":item,
-                "cost":cost,
-                "type":type,
-                "uid":uid
-            ] as [String : Any]
-            colRef.addDocument(data: data)
-        }
-        else {
-            print("no user logged in")
+        if(type != "Choose Type") {
+            log()
+            if let uid=Auth.auth().currentUser?.uid {
+                print("uid: \(uid)")
+                let db=Firestore.firestore()
+                let colRef=db.collection("transactions")
+                let data=[
+                    "item":item,
+                    "cost":cost,
+                    "type":type,
+                    "uid":uid
+                ] as [String : Any]
+                colRef.addDocument(data: data)
+            }
+            else {
+                print("no user logged in")
+            }
+        } else {
+            print("Select a valid type.")
         }
     }
 }
