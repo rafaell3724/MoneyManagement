@@ -13,5 +13,6 @@ struct Transaction: Codable, Identifiable {
     var item:String
     var cost:Float
     var type:String
+    var datetime:Date
     var uid:String
 }

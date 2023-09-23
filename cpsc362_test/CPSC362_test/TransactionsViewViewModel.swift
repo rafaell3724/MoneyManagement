@@ -31,7 +31,7 @@ class TransactionsViewViewModel: ObservableObject {
                     for doc in querySnapshot!.documents {
                         do {
                             let transaction=try doc.data(as: Transaction.self)
-                            //print("xxx \(doc.data())")
+                            print("xxx \(doc.data())")
                             self.transactions.append(transaction)
                         } catch {
                             print(error)

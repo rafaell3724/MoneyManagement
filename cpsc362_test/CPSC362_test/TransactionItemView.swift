@@ -9,16 +9,26 @@ import SwiftUI
 
 struct TransactionItemView: View {
     var transaction:Transaction
+    var dateFormat:DateFormatter=DateFormatter()
+    
+    init(transaction:Transaction){
+        self.transaction=transaction
+        dateFormat.dateFormat="MM/dd/yyyy"
+    }
+    
     var body: some View {
         HStack(alignment: .center){
-            Text(transaction.item)
+            VStack(alignment: .leading, spacing: 5){
+                Text(transaction.item)
+            }
             Spacer()
-            VStack(alignment: .trailing, spacing: 10){
+            VStack(alignment: .trailing, spacing: 5){
                 Text(String(format:"$%.2f",transaction.cost))
                 Text(transaction.type)
+                Text(dateFormat.string(from: transaction.datetime))
             }
         }
-        .padding()
+        .padding(.horizontal)
     }
 }
 
@@ -29,6 +39,7 @@ struct TransactionItemView_Previews: PreviewProvider {
                 item:"Burger",
                 cost:9.99,
                 type:"food",
+                datetime: Date(),
                 uid: ""
             )
         )

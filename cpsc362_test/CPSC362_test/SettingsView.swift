@@ -6,10 +6,28 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct SettingsView: View {
+    @AppStorage("isDarkMode") private var isDarkMode = false
+
     var body: some View {
-        Text("Settings here")
+        NavigationView {
+            List{
+                Section("Account"){
+                    Toggle("Dark Mode", isOn: $isDarkMode)
+                    Button("Log out") {
+                        do{
+                            try Auth.auth().signOut()
+                            print("Log out success")
+                        } catch{
+                            print("Error signout")
+                        }
+                    }
+                }
+            }
+            .navigationTitle("Settings")
+        }
     }
 }
 
