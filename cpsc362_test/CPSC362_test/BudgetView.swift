@@ -41,7 +41,7 @@ struct SetBudgetView: View {
                     TextField("Enter budget for \(type)", value: Binding(
                         get: { budget[type] ?? 0 },
                         set: { newValue in
-                            budget[type] = newValue
+                            budget[type] = Float(newValue)
                         }
                     ), formatter: NumberFormatter())
                     .keyboardType(.decimalPad)
@@ -56,26 +56,22 @@ struct SetBudgetView: View {
             }
             
             let db = Firestore.firestore()
-            var budgetData = [[String: Any]]()
-            for (budgetType, amount) in budget {
+            var budgetData: [String: Float] = [:]
+                for (budgetType, amount) in budget {
+                    budgetData[budgetType] = amount
+                }
                 let budgetItem: [String: Any] = [
                     "uid": uid,
-                    "budgetType": budgetType,
-                    "amount": amount
+                    "budgetData": budgetData
                 ]
-                budgetData.append(budgetItem)
-            }
-            
-            for item in budgetData {
-                db.collection("budgets").addDocument(data: item) { error in
+                        
+                db.collection("budgets").addDocument(data: budgetItem) { error in
                     if let error = error {
                         print("Error saving budget: \(error.localizedDescription)")
-                    } else {
-                        print("Budget data saved")
-                    }
+                } else {
+                    print("Budget data saved")
                 }
             }
-            
         }
     }
 }
