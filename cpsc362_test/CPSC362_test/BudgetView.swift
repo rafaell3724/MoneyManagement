@@ -43,7 +43,12 @@ struct SetBudgetView: View {
                         set: { newValue in
                             budget[type] = Float(newValue)
                         }
-                    ), formatter: NumberFormatter())
+                    ), formatter: {
+                        let formatter = NumberFormatter()
+                        formatter.numberStyle = .decimal
+                        formatter.minimumFractionDigits = 2
+                        return formatter
+                    } ())
                     .keyboardType(.decimalPad)
                 }
             }
