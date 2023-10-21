@@ -33,6 +33,4 @@ platform:
 Firebase, Django, Ruby on Rails, Express
 Implement APIs for communication between the front end and back end.
 
-4. Database Setup and Management: (we probably won’t need to do this?)
-Configure a dbms.
-MySQL, or firebase, xcode(?)
+4. Database Setup and Management: Firebase
