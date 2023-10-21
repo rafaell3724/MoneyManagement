@@ -35,4 +35,4 @@ Implement APIs for communication between the front end and back end.
 
 4. Database Setup and Management: Firebase
 
-https://docs.google.com/presentation/d/10sE1NuADzpSXDosfWzfpmYnWHPhYSZzopQbR5IXgQH8/edit#slide=id.g291a124a689_1_21
+https://docs.google.com/presentation/d/10sE1NuADzpSXDosfWzfpmYnWHPhYSZzopQbR5IXgQH8/edit#slide=id.p
